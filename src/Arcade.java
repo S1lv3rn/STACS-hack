@@ -1,4 +1,3 @@
-package Arcade.impl;
 public class Arcade {
 static String game[] = new String[1];
     public static void main(String[] args) {
