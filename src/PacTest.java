@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,12 +22,18 @@ public class PacTest {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        while (!dead) {
-            try {
-                reader.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            while (!dead) {
+                System.out.println("Move: ");
+                String action = reader.readLine();
+                char dir = action.toLowerCase().charAt(0);
+                System.out.println(dir);
+                pacman.movePacman(dir);
+                pac.display();
+
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
