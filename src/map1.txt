@@ -1,0 +1,10 @@
+    bbbbbbbbbbbbbbb
+    b.............b
+    b.............b
+ bbbb....ww.ww....bbbb
+ ........w...w........
+ ........wwwww........
+ bbbb.............bbbb
+    b....wwwww....b
+    b.............b
+    bbbbbbbbbbbbbbb
