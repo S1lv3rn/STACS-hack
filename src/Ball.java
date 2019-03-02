@@ -3,12 +3,14 @@ import java.awt.*;
 public class Ball extends Sprites {
     int dirX = 1;
     int dirY = 1;
-    int diameter = lenX;
-    int score1 = 0;
-    int score2 = 0;
+    int score0 = 0;
+    int score1 = 10;
+    int score2 = 10;
+    boolean pVp;
 
-    Ball(int x, int y) {
+    Ball(int x, int y, boolean pVp) {
         super(x, y, 30,30);
+        this.pVp = pVp;
     }
 
     @Override
@@ -17,31 +19,62 @@ public class Ball extends Sprites {
     }
 
 
-    public void move(int h, int w) {
+    public void move(int h, int w) throws InterruptedException {
 
         x += dirX;
         y += dirY;
 
-        if ((y + lenY)  > h - diameter) {
-            dirY = -1;
+        if ((y + lenY)  > h) {
+            dirY = -dirY;
 
         } else if (y < 0) {
-            dirY = 1;
+            dirY = -dirY;
         }
 
-        if ((x + lenX) > w - diameter) {
-            dirX = -1;
+        if ((x + lenX) > w) {
+
+            if (pVp) {
+                score2 -= 1;
+            }
+
+            x = w/2 + (lenX/2);
+            y = h/2 + (lenY/2);
+            Thread.sleep(100);
+
+
 
         } else if (x < 0) {
-            dirX = 1;
+
+            if (pVp) {
+                score1 -= 1;
+            }
+
+            x = w/2 + (lenX/2);
+            y = h/2 + (lenY/2);
+            Thread.sleep(100);
+
         }
+
+
 
     }
 
     void collision(Bat b) {
         if (b.getBounds().intersects(getBounds())) {
             dirX = -dirX;
+            if (!pVp && (b.plr1 && x >= b.lenX || !b.plr1 && lenX <= b.x)) {
+                score0 ++;
+            }
         }
+    }
+
+
+    void reSet() {
+        dirX = 1;
+        dirY = 1;
+        score0 = 0;
+        score1 = 10;
+        score2 = 10;
     }
 
 

@@ -3,14 +3,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
+import com.microsoft.cognitiveservices.speech.*;
 
 public class Arcade implements ActionListener {
-    private int clicks = 1;
-    private JLabel label = new JLabel("Number of clicks:  0     ");
     private JFrame frame = new JFrame();
     private JList list;
     private JLabel coretext;
     private static String game[] = new String[2];
+    static int check = 0;
     public Arcade() {
         // the clickable button
         JButton button = new JButton("Click Me");
@@ -31,7 +31,7 @@ public class Arcade implements ActionListener {
         // set up the frame and display it
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("GUI");
+        frame.setTitle("GameMachine");
         frame.pack();
         frame.setVisible(true);
         panel.setBackground(Color.BLACK);
@@ -50,18 +50,20 @@ public class Arcade implements ActionListener {
     }
 
     public static void GameExecute(int code) throws InterruptedException{
+        check = 1;
         if (code == 0) {
             Pong.main();
         }
         else if (code == 1)
             Pacmain.main();
     }
-    int speech = 0;
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
+        try{
+        int speechcheck = 1;
         Arcade A = new Arcade();
-        voce.SpeechInterface.init("./lib", true, true,
+        SpeechConfig config = SpeechConfig.fromSubscription("54eeec34e6844d1dae7f02d1518cfbe0", "eastus");
+        voce.SpeechInterface.init("./lib", true, false,
                 "./lib/gram", "digits");
-        int check = 0;
         game[0] = "Pong";
         game[1] = "Pacman";
         String gameenter = "";
@@ -75,15 +77,21 @@ public class Arcade implements ActionListener {
                     System.out.println(++count + "." + gamelist);
                     voce.SpeechInterface.synthesize(count + " " + gamelist);
                 }
-                if (check == 0)
+                if (speechcheck == 0)
                     gameenter = keyboard.nextLine();
                 else {
                     Thread.sleep(200);
-                    voce.SpeechInterface.setRecognizerEnabled(true);
-                    while (voce.SpeechInterface.getRecognizerQueueSize() > 0) {
-                        //  gameenter = voce.SpeechInterface.popRecognizedString();
-                        System.out.println(voce.SpeechInterface.popRecognizedString());
+                    SpeechRecognizer recognizer = new SpeechRecognizer(config);
+                    {
+                        SpeechRecognitionResult result = recognizer.recognizeOnceAsync().get();
+                        System.out.println(result.getText());
                     }
+//                 //   voce.SpeechInterface.setRecognizerEnabled(true);
+//                    while (voce.SpeechInterface.getRecognizerQueueSize() > 0) {
+//                        //  gameenter = voce.SpeechInterface.popRecognizedString();
+//                        System.out.println(voce.SpeechInterface.popRecognizedString());
+//                    }
+
                 }
                 check = 0;
                 for (int i = 0; i < game.length; i++) {
@@ -103,4 +111,10 @@ public class Arcade implements ActionListener {
             }
         }
     }
+        catch(Exception ee)
+        {
+            System.out.println(ee);
+        }
+    }
+
 }
