@@ -9,12 +9,13 @@ public static void GameExecute(int code)
         Pong.runPong();
     }
 }   int speech = 0;
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws InterruptedException {
         voce.SpeechInterface.init("./lib", true, true,
                 "./lib/gram", "digits");
         int check = 1;
         game[0] = "Pong";
-        String gameenter = new String();
+        String gameenter = "";
         if (args.length != game.length)
         {
             Scanner keyboard = new Scanner(System.in);
@@ -28,20 +29,24 @@ public static void GameExecute(int code)
                 }
                 if (check == 0)
                 gameenter = keyboard.nextLine();
-                else
-                {while (voce.SpeechInterface.getRecognizerQueueSize() > 0)
-                    gameenter = voce.SpeechInterface.popRecognizedString();
-                System.out.println (gameenter);
+                else {
+                    Thread.sleep(200);
+                    voce.SpeechInterface.setRecognizerEnabled(true);
+                    while (voce.SpeechInterface.getRecognizerQueueSize() > 0) {
+                        //  gameenter = voce.SpeechInterface.popRecognizedString();
+                        System.out.println(voce.SpeechInterface.popRecognizedString());
+                    }
                 }
                 check = 0;
                 for (int i = 0; i < game.length; i++) {
                     if (game[i].equals(gameenter)) {
-                        check = 1;
+                        check = i;
                         // execute the related game
                     }
                 }
             }
             while (check == 0);
+            voce.SpeechInterface.destroy();
         }
         else
         {
