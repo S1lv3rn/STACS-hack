@@ -1,14 +1,15 @@
 import java.util.Scanner;
 
 public class Arcade {
-static String game[] = new String[1];
-public static void GameExecute(int code)
-{
-    if (code == 0)
-    {
-        Pong.runPong();
+    static String game[] = new String[1];
+
+    public static void GameExecute(int code) {
+        if (code == 0) {
+            Pong.runPong();
+        }
     }
-}   int speech = 0;
+
+    int speech = 0;
 
     public static void main(String[] args) throws InterruptedException {
         voce.SpeechInterface.init("./lib", true, true,
@@ -28,7 +29,7 @@ public static void GameExecute(int code)
                     voce.SpeechInterface.synthesize(count + " " + gamelist);
                 }
                 if (check == 0)
-                gameenter = keyboard.nextLine();
+                    gameenter = keyboard.nextLine();
                 else {
                     Thread.sleep(200);
                     voce.SpeechInterface.setRecognizerEnabled(true);
@@ -54,7 +55,7 @@ public static void GameExecute(int code)
             {
                 if (game[i].equals(gameenter))
                 {
-                   GameExecute(i);
+                    GameExecute(i);
                 }
             }
         }
