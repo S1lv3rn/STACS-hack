@@ -10,7 +10,7 @@ public class Arcade implements ActionListener {
     private JList list;
     private JLabel coretext;
     private static String game[] = new String[2];
-
+    static int check = 0;
     public Arcade() {
         // the clickable button
         JButton button = new JButton("Click Me");
@@ -50,6 +50,7 @@ public class Arcade implements ActionListener {
     }
 
     public static void GameExecute(int code) throws InterruptedException{
+        check = 1;
         if (code == 0) {
             Pong.main();
         }
@@ -59,7 +60,6 @@ public class Arcade implements ActionListener {
     public static void main(String[] args) {
         try{
         int speechcheck = 1;
-        int check = 0;
         Arcade A = new Arcade();
         SpeechConfig config = SpeechConfig.fromSubscription("54eeec34e6844d1dae7f02d1518cfbe0", "eastus");
         voce.SpeechInterface.init("./lib", true, false,
@@ -84,7 +84,6 @@ public class Arcade implements ActionListener {
                     SpeechRecognizer recognizer = new SpeechRecognizer(config);
                     {
                         SpeechRecognitionResult result = recognizer.recognizeOnceAsync().get();
-
                         System.out.println(result.getText());
                     }
 //                 //   voce.SpeechInterface.setRecognizerEnabled(true);
