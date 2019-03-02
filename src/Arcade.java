@@ -12,7 +12,6 @@ public class Arcade implements ActionListener {
     private JLabel coretext;
 
     public Arcade() {
-
         // the clickable button
         JButton button = new JButton("Click Me");
         button.addActionListener(this);
@@ -39,8 +38,9 @@ public class Arcade implements ActionListener {
     // process the button clicks
     public void actionPerformed(ActionEvent e) {
         String str = (String) list.getSelectedValue();
-        System.out.println(str);
-        coretext.setText(str);
+        GameExecute(list.getSelectedIndex());
+//        System.out.println(str);
+//        coretext.setText(str);
     }
 
     static String game[] = new String[2];
@@ -50,10 +50,9 @@ public class Arcade implements ActionListener {
             Pong.runPong();
         }
     }
-
     int speech = 0;
-
     public static void main(String[] args) throws InterruptedException {
+        Arcade A = new Arcade();
         voce.SpeechInterface.init("./lib", true, true,
                 "./lib/gram", "digits");
         int check = 0;
