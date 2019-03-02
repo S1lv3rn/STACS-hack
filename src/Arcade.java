@@ -8,9 +8,11 @@ public static void GameExecute(int code)
     {
         Pong.runPong();
     }
-}
+}   int speech = 0;
     public static void main(String[] args) {
-        int check = 0;
+        voce.SpeechInterface.init("./lib", true, true,
+                "./lib/gram", "digits");
+        int check = 1;
         game[0] = "Pong";
         String gameenter = new String();
         if (args.length != game.length)
@@ -18,11 +20,19 @@ public static void GameExecute(int code)
             Scanner keyboard = new Scanner(System.in);
             do {
                 System.out.println("Select game:");
+                voce.SpeechInterface.synthesize("Select game:");
                 int count = 0;
                 for (String gamelist : game) {
                     System.out.println(++count + "." + gamelist);
+                    voce.SpeechInterface.synthesize(count + " " + gamelist);
                 }
+                if (check == 0)
                 gameenter = keyboard.nextLine();
+                else
+                {while (voce.SpeechInterface.getRecognizerQueueSize() > 0)
+                    gameenter = voce.SpeechInterface.popRecognizedString();
+                System.out.println (gameenter);
+                }
                 check = 0;
                 for (int i = 0; i < game.length; i++) {
                     if (game[i].equals(gameenter)) {
