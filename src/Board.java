@@ -7,7 +7,6 @@ public class Board {
     private final static char vertical = '|';
     private final static char intersection = '+';
 
-
     private char type;
 
     public char getBlock (char nextBlock) {
