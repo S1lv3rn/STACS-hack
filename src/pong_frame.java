@@ -9,7 +9,7 @@ public class pong_frame {
         pongFrame.setSize(2048,2048);
         pongFrame.setVisible(true);
         pongFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pongFrame.pack();
+
 
     }
 
