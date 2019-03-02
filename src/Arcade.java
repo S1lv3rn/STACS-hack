@@ -13,7 +13,7 @@ public static void GameExecute(int code)
     public static void main(String[] args) throws InterruptedException {
         voce.SpeechInterface.init("./lib", true, true,
                 "./lib/gram", "digits");
-        int check = 1;
+        int check = 0;
         game[0] = "Pong";
         String gameenter = "";
         if (args.length != game.length)
