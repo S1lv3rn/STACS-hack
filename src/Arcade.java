@@ -5,12 +5,12 @@ import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 public class Arcade implements ActionListener {
-    private int clicks = 0;
+    private int clicks = 1;
     private JLabel label = new JLabel("Number of clicks:  0     ");
     private JFrame frame = new JFrame();
     private JList list;
     private JLabel coretext;
-
+    private static String game[] = new String[2];
     public Arcade() {
         // the clickable button
         JButton button = new JButton("Click Me");
@@ -42,16 +42,12 @@ public class Arcade implements ActionListener {
         try {
             String str = (String) list.getSelectedValue();
             GameExecute(list.getSelectedIndex());
-//        System.out.println(str);
-//        coretext.setText(str);
         }
         catch (Exception cheese)
         {
-            System.out.println (cheese);
+            cheese.printStackTrace();
         }
     }
-
-    static String game[] = new String[2];
 
     public static void GameExecute(int code) throws InterruptedException{
         if (code == 0) {
