@@ -8,7 +8,7 @@ public class Pong {
 
 
 
-    public static void main(String[] args){
+    public static void runPong(String[] args){
 
 
         JFrame frame = new JFrame("Pong");
