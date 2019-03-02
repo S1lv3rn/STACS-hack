@@ -49,7 +49,7 @@ public class Pong extends JPanel{
 
 
 
-    public static void main(String[] args) throws InterruptedException{
+    public static void main() throws InterruptedException{
         Pong pong = new Pong();
 
         setUp(pong);

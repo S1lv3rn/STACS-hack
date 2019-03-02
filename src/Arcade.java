@@ -36,18 +36,24 @@ public class Arcade implements ActionListener {
     }
 
     // process the button clicks
-    public void actionPerformed(ActionEvent e) {
-        String str = (String) list.getSelectedValue();
-        GameExecute(list.getSelectedIndex());
+    public void actionPerformed(ActionEvent e){
+        try {
+            String str = (String) list.getSelectedValue();
+            GameExecute(list.getSelectedIndex());
 //        System.out.println(str);
 //        coretext.setText(str);
+        }
+        catch (Exception cheese)
+        {
+            System.out.println (cheese);
+        }
     }
 
     static String game[] = new String[2];
 
-    public static void GameExecute(int code) {
+    public static void GameExecute(int code) throws InterruptedException{
         if (code == 0) {
-            Pong.runPong();
+            Pong.main();
         }
         else if (code == 1)
             Pacmain.main();
