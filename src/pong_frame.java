@@ -10,7 +10,6 @@ public class pong_frame {
         pongFrame.setVisible(true);
         pongFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
     }
 
 
