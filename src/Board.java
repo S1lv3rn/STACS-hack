@@ -20,5 +20,19 @@ public class Board {
         }
     }
 
+    public boolean canLeftRight(char nextBlock) {
+        if (getBlock(nextBlock) != horizontal || getBlock(nextBlock) != intersection) {
+            return false;
+        }
 
+        return true;
+    }
+
+    public boolean canUpDown(char nextBlock) {
+        if (getBlock(nextBlock) != vertical || getBlock(nextBlock) != wall) {
+            return false;
+        }
+
+        return true;
+    }
 }
