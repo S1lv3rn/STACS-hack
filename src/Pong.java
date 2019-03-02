@@ -81,9 +81,7 @@ public class Pong extends JPanel{
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
       p.scHeight = p.getHeight();
-boolean collision() {
 
-    }
     }
 
 
@@ -103,19 +101,9 @@ boolean collision() {
     public void moveAll() {
 
         ball.move(scHeight, scWidth);
+        ball.collision(p1);
 
     }
-
-    boolean collision(Bat b) {
-        if (b.getBounds().intersects(ball.getBounds())) {
-
-        }
-    }
-
-
-
-
-
 
 
 

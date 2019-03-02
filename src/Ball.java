@@ -4,6 +4,8 @@ public class Ball extends Sprites {
     int dirX = 1;
     int dirY = 1;
     int diameter = lenX;
+    int score1 = 0;
+    int score2 = 0;
 
     Ball(int x, int y) {
         super(x, y, 30,30);
@@ -36,9 +38,9 @@ public class Ball extends Sprites {
 
     }
 
-    boolean collision(Bat b) {
+    void collision(Bat b) {
         if (b.getBounds().intersects(getBounds())) {
-
+            dirX = -dirX;
         }
     }
 
