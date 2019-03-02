@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class Arcade {
 static String game[] = new String[1];
-public void GameExecute(int code)
+public static void GameExecute(int code)
 {
     if (code == 0)
     {
-
+        Pong.runPong();
     }
 }
     public static void main(String[] args) {
@@ -39,7 +39,7 @@ public void GameExecute(int code)
             {
                 if (game[i].equals(gameenter))
                 {
-                    // execute the related game
+                   GameExecute(i);
                 }
             }
         }
