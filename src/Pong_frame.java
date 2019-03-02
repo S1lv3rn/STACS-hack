@@ -1,11 +1,11 @@
 import javax.swing.*;
 
 
-public class pong_frame {
+public class Pong_frame {
 
     public void createFrame(){
 
-        JFrame pongFrame = new JFrame();
+        JFrame pongFrame = new JFrame("Pong");
         pongFrame.setSize(2048,2048);
         pongFrame.setVisible(true);
         pongFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
