@@ -1,11 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 public class JPacMan  {
 
-    JLabel[] tile;
+    JLabel[][] tile;
 
     public void display() {
 
@@ -18,7 +17,7 @@ public class JPacMan  {
             for(int j = 0; j< 15; j++){
                tile[i][j] = new JLabel();
                tile[i][j].setIcon(pizza);
-
+               pacPanel.add(tile[i][j]);
             }
         }
 
