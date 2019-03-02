@@ -16,6 +16,7 @@ public class Arcade implements ActionListener {
         JButton button = new JButton("Click Me");
         button.addActionListener(this);
         coretext = new JLabel("Select your game");
+        coretext.setForeground(Color.WHITE);
         // the panel with the button and text
         JPanel panel = new JPanel();
         list = new JList(Arcade.game);
@@ -33,6 +34,7 @@ public class Arcade implements ActionListener {
         frame.setTitle("GUI");
         frame.pack();
         frame.setVisible(true);
+        panel.setBackground(Color.BLACK);
     }
 
     // process the button clicks
