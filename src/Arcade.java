@@ -1,9 +1,14 @@
-package Arcade.impl;
-
 import java.util.Scanner;
 
 public class Arcade {
 static String game[] = new String[1];
+public void GameExecute(int code)
+{
+    if (code == 0)
+    {
+
+    }
+}
     public static void main(String[] args) {
         int check = 0;
         game[0] = "Pong";
@@ -12,7 +17,6 @@ static String game[] = new String[1];
         {
             Scanner keyboard = new Scanner(System.in);
             do {
-
                 System.out.println("Select game:");
                 int count = 0;
                 for (String gamelist : game) {
