@@ -49,6 +49,8 @@ public class Arcade implements ActionListener {
         if (code == 0) {
             Pong.runPong();
         }
+        else if (code == 1)
+            Pacmain.main();
     }
     int speech = 0;
     public static void main(String[] args) throws InterruptedException {
