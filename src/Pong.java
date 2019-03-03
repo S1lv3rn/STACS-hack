@@ -19,7 +19,7 @@ public class Pong extends JPanel{
 
     int p1Sc = 0;
     int p2Sc = 0;
-
+    static int speed = 20;
 
 
     Ball ball = new Ball(scWidth/2 + 15, scHeight/2 + 15, pvp);
@@ -86,11 +86,7 @@ public class Pong extends JPanel{
         setFocusable(true);
     }
 
-
-
-
-
-    public static void main(String[] args) throws InterruptedException{
+    public static void main() throws InterruptedException {
         int mode = 2;
         Pong pong = new Pong(mode);
         boolean again = true;
@@ -117,18 +113,28 @@ public class Pong extends JPanel{
                 pong.state = 1;
                 //introduce mode (1)
                 printAndVal(pong);
-                Thread.sleep(20);
+                Thread.sleep(speed);
                 System.out.println("bruh1");
-
+                int speedcheck = 0;
                 pong.state = 0;
                 while (play) {
                     pong.moveAll();
 
                     printAndVal(pong); //upd8 game (0)
-                    Thread.sleep(20);
-
+                    Thread.sleep(speed);
+                    if (speed < 2) {
+                        speedcheck = 1;
+                    }
+                    if (speed >= 15) {
+                        speedcheck = 0;
+                    }
+                    if (speedcheck == 0) {
+                        speed--;
+                    } else {
+                        speed++;
+                    }
                     play = finRound(pong, mode);
-                    System.out.println("CHECKIN PL : " + play);
+//                    System.out.println("CHECKIN PL : " + play);
                 } //finish a mode
 
                 game = finGame(pong, mode);
@@ -151,10 +157,12 @@ public class Pong extends JPanel{
                     pong.switchClick();
 
                     if (pong.pvp) {
+                        voce.SpeechInterface.synthesize("Now in competitive mode!");
                         System.out.println("Switch to PVP! ");
 
                     } else {
                         pong.rounds++;
+                        voce.SpeechInterface.synthesize("Now in co-operative mode!");
                         System.out.println("Switch to COOP! R" + pong.rounds);
                     }
                 }
@@ -212,7 +220,7 @@ public class Pong extends JPanel{
                 return true;
             }
         } else {
-            System.out.println("CHEKIN AND " + p.ball.coopPlay);
+            //         System.out.println("CHEKIN AND " + p.ball.coopPlay);
             return p.ball.coopPlay;
         }
     }
@@ -223,13 +231,16 @@ public class Pong extends JPanel{
         if (m == 0) {
             //pvp
             if (p.p1Sc > p.p2Sc) {
+                voce.SpeechInterface.synthesize("PLAYER 1 WINS");
                 System.out.println("PLAYER 1 WINS");
             } else {
+                voce.SpeechInterface.synthesize("PLAYER 2 WINS");
                 System.out.println("PLAYER 2 WINS");
             }
             return false;
 
         } else if (m == 1) {
+            voce.SpeechInterface.synthesize("TOTAL POINTS : " + p.ball.score0);
             System.out.println("TOTAL POINTS : " + p.ball.score0);
             return false;
 
@@ -239,9 +250,11 @@ public class Pong extends JPanel{
                 if (p.pvp) {
                     //add scores and stuff
                     if (p.p1Sc > p.p2Sc) {
+                        voce.SpeechInterface.synthesize("C: PLAYER 1 WINS");
                         System.out.println("C: PLAYER 1 WINS");
 
                     } else {
+                        voce.SpeechInterface.synthesize("C: PLAYER 2 WINS");
                         System.out.println("C: PLAYER 2 WINS");
                     }
                     return false;
@@ -309,7 +322,7 @@ public class Pong extends JPanel{
             printScore(g);
 
         } else if (state == 1) {
-            //this indroduces the mode
+            //this introduces the mode
 
             g.setColor(Color.BLACK);
 
@@ -332,6 +345,7 @@ public class Pong extends JPanel{
             }
 
         } else if (state == 3) {
+            voce.SpeechInterface.synthesize("PLAY AGAIN? \n(Y/N)");
             g.drawString("PLAY AGAIN? \n(Y/N)", scWidth/2, scHeight/2);
 
         } else if (state == 4) {
@@ -343,9 +357,11 @@ public class Pong extends JPanel{
             setBackground(new Color(169, 108, 170));
             g.setColor(Color.BLACK);
             if (p1Sc > p2Sc) {
+                voce.SpeechInterface.synthesize("C: PLAYER 1 WINS");
                 g.drawString("C: PLAYER 1 WINS", scWidth/2, scHeight/2);
 
             } else {
+                voce.SpeechInterface.synthesize("C: PLAYER 2 WINS");
                 g.drawString("C: PLAYER 2 WINS", scWidth/2, scHeight/2);
             }
 
