@@ -39,22 +39,24 @@ public class Pacman {
         character = characterDirection(dir);
         if (dir == 'd') {
             original = movement.moveRight(character, original);
-            column++;
             if (column == RIGHTBORDER) {
-                column = 0;
+//                column--;
+            } else {
+                column++;
             }
         } else if (dir == 'a') {
             original = movement.moveLeft(character, original);
-            column--;
+
             if (column == LEFTBORDER) {
                 column = Pac2.board[row].length - 1;
+            } else {
+                column--;
             }
         } else if (dir == 'w') {
             original = movement.moveUp(character, original);
             row--;
         }else if (dir == 's') {
             original = movement.moveDown(character, original);
-            row++;
         }
 
         System.out.println(original);
