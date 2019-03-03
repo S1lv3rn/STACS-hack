@@ -43,7 +43,9 @@ public class Board {
         switch (nextBlock) {
             case wall : return false;
             case horizontal : return false;
-            default: return true;
+            case vertical : return true;
+            case intersection : return true;
+            default: return false;
         }
     }
 }
