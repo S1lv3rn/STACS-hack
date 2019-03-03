@@ -6,6 +6,11 @@ public class PacTest {
     public static void main (String[] args) {
         Pac2 pac = new Pac2();
         Pacman pacman = new Pacman();
+        ZombieStudents zombieA = new ZombieStudents('a');
+        ZombieStudents zombieB = new ZombieStudents('b');
+        ZombieStudents zombieC = new ZombieStudents('c');
+        ZombieStudents zombieD = new ZombieStudents('d');
+
         Boolean dead = false;
 
         try {
@@ -14,7 +19,17 @@ public class PacTest {
             e.printStackTrace();
         }
 
-        pacman.initPacman();
+        pacman.initcharacter();
+
+        zombieA.setRow(14);
+        zombieB.setRow(14);
+        zombieC.setRow(14);
+        zombieC.setRow(14);
+
+        zombieA.setColumn(11);
+        zombieB.setColumn(12);
+        zombieC.setColumn(13);
+        zombieD.setColumn(14);
         pac.display();
 
 
@@ -26,12 +41,19 @@ public class PacTest {
                 String action = reader.readLine();
                 char dir = action.toLowerCase().charAt(0);
                 System.out.println(dir);
-                pacman.movePacman(dir);
+                pacman.moveCharacter(dir);
                 pac.display();
+
+                System.out.println("=====");
+
 
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        while(true) {
+
         }
     }
 }
