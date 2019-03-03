@@ -7,6 +7,7 @@ public class Ball extends Sprites {
     int score1 = 10;
     int score2 = 10;
     boolean pVp;
+    boolean coopPlay = true;
 
     Ball(int x, int y, boolean pVp) {
         super(x, y, 30,30);
@@ -35,6 +36,9 @@ public class Ball extends Sprites {
 
             if (pVp) {
                 score2 -= 1;
+
+            } else {
+                coopPlay = false;
             }
 
             x = w/2 + (lenX/2);
@@ -47,7 +51,11 @@ public class Ball extends Sprites {
 
             if (pVp) {
                 score1 -= 1;
+
+            } else {
+                coopPlay = false;
             }
+
 
             x = w/2 + (lenX/2);
             y = h/2 + (lenY/2);
@@ -75,6 +83,7 @@ public class Ball extends Sprites {
         score0 = 0;
         score1 = 10;
         score2 = 10;
+        coopPlay = true;
     }
 
 
