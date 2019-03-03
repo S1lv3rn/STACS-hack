@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 public class PacTest {
     public static void main (String[] args) {
-        pac2 pac = new pac2();
+        Pac2 pac = new Pac2();
         Pacman pacman = new Pacman();
         ZombieStudents zombieA = new ZombieStudents('a');
         ZombieStudents zombieB = new ZombieStudents('b');
