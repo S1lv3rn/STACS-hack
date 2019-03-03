@@ -1,122 +1,74 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.io.File;
 
-    public class Gui extends JFrame {
+class Gui extends JFrame{
 
-        JButton[][] button;
+    static ImageIcon A = new ImageIcon("amex.png");
+    static ImageIcon B = new ImageIcon("bloomberg.jpg");
+    static ImageIcon J = new ImageIcon("jpm.jpg");
+    static ImageIcon T = new ImageIcon("talentticker.png");
+    static ImageIcon Pizza = new ImageIcon("pizza.png");
+    static ImageIcon Wall = new ImageIcon("wall.jpeg");
+    static ImageIcon Uni = new ImageIcon("uni.png");
+    static ImageIcon Default = new ImageIcon("default.png");
 
-        public void displayScreen() {
-            Gui test = new Gui();
-            test.work();
-        }
 
-        public void work() {
-            long now = System.currentTimeMillis();
-            JFrame frame = new JFrame("JPacMan"); // gives us title of application
+    public void work(){
+
             JPanel panel = new JPanel();
-            JLabel pac2 = new JLabel();
-            ImageIcon A = new ImageIcon("amex.png");
-            ImageIcon B = new ImageIcon("bloomberg.jpg");
-            ImageIcon J = new ImageIcon("jpm.jpg");
-            ImageIcon T = new ImageIcon("talentticker.png");
-            ImageIcon Pizza = new ImageIcon("pizza.png");
-            ImageIcon Wall = new ImageIcon("wall.jpeg");
-            ImageIcon Uni = new ImageIcon("uni.png");
-            panel.add(pac2);
-            frame.add(panel);
-            JLabel score = new JLabel();
+            getContentPane().add(panel);
 
+            int row = 36;
+            int col = 28;
 
-            frame.add(panel);
-            frame.setSize(2048, 2048); // size of the applet
-            frame.setLocationRelativeTo(null);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 500, 500);
+            panel.setLayout(new GridLayout(row, col));
+            setVisible(true);
 
-            panel.setLayout(new FlowLayout());
-            panel.setLayout(null); // so that we xcan set the positioin of the butoons
+            JLabel[][] grid= new JLabel[row][col];
+            for (int i = 0; i < row; i++){
+                for (int j = 0; j < col; j++){
+                    grid[i][j] = new JLabel();
 
-            button = new JButton[36][28];
+                    //grid[i][j].setBackground(Color.black);
 
 
 
 
-            for (int i = 0; i < Pac2.board.length; i++) {
-                for (int j = 0; j < Pac2.board[i].length; j++) {
-                    button[i][j].setBorderPainted(false);
-                    button[i][j].setFocusPainted(false);
-                    button[i][j].setContentAreaFilled(false);
                     if (Pac2.board[i][j] == '0') {
-                        button[i][j] = new JButton(Wall);
+                        grid[i][j].setIcon(Wall);
                     } else if (Pac2.board[i][j] == '+' || Pac2.board[i][j] == '-') {
-                        button[i][j] = new JButton(Pizza);
+                        grid[i][j].setIcon(Pizza);
                     } else if (Pac2.board[i][j] == '<') {
-                        button[i][j] = new JButton(Uni);
-                        pac2.add(button[i][j]);
+                        grid[i][j].setIcon(Uni);
+
                     } else if (Pac2.board[i][j] == 'a') {
-                    button[i][j] = new JButton(A);
-                        pac2.add(button[i][j]);
+                        grid[i][j].setIcon(A);
+
                     }else if (Pac2.board[i][j] == 'b') {
-                        button[i][j] = new JButton(B);
-                        pac2.add(button[i][j]);
+                        grid[i][j].setIcon(B);
+
                     }else if (Pac2.board[i][j] == 'j') {
-                        button[i][j] = new JButton(J);
-                        pac2.add(button[i][j]);
+                        grid[i][j].setIcon(J);
+
                     }else if (Pac2.board[i][j] == 't') {
-                        button[i][j] = new JButton(T);
-                        pac2.add(button[i][j]);
+                        grid[i][j].setIcon(T);
+
+                    }else  {
+                        grid[i][j].setIcon(Default);
+
                     }
-                   pac2.add(button[i][j]);
-                    button[i][j].setBounds(i*50,j*50,50,50);
+
+                    grid[i][j].setBorder(new LineBorder(Color.BLACK));
+                    grid[i][j].setOpaque(false);
+                    panel.add(grid[i][j]);
+                    add(panel);
+                    pack();
+                }
             }
-
-
-
-
-
-//            Timer timer = new Timer(2500, new ActionListener(){
-//
-//                boolean clicked = false;
-//                @Override
-//
-//                public void actionPerformed(ActionEvent e) {
-//                    clicked = false;
-//                    int current = (int)(Math.random()*10);
-//                    button[current].setIcon(crab);
-//
-//                    for (int i = 0; i< button.length; i++){
-//                        if(i != current) {
-//                            button[i].setIcon(crabstill);
-//                        }
-//                        button[i].addActionListener(this);
-//
-//                        button[i].addMouseListener(new MouseAdapter() {
-//                                                       @Override
-//                                                       public void mouseClicked(MouseEvent evt) {
-//                                                           //	System.out.println(evt);
-//                                                           if (!clicked) {
-//                                                               clickedNumber++;
-//                                                               clicked = true;
-//                                                           }
-//                                                       }
-//                                                   }
-//                        );
-//                        if((System.currentTimeMillis()> (now + 60000)) || (clickedNumber>= 10) ) {
-//                            frame.setVisible(false);
-//                        }
-//
-//                    }
-//                }
-//
-//            });
-//            timer.start();
-
-                score.setText("game over");
-                pac2.add(score);
-                panel.add(pac2);
-                frame.add(panel);
-
-            }
-
         }
     }
