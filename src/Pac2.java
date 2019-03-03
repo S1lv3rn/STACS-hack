@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class pac2 {
+public class Pac2 {
 
     public static char[][] board = new char[36][28];
 

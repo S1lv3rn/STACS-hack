@@ -1,12 +1,10 @@
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class PacTest {
     public static void main (String[] args) {
-        pac2 pac = new pac2();
+        Pac2 pac = new Pac2();
         Pacman pacman = new Pacman();
         Boolean dead = false;
 

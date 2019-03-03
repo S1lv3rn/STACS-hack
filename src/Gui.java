@@ -1,20 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
 
-    public class gui extends JFrame {
+    public class Gui extends JFrame {
 
-        JButton[][] button ;
-        public void displayScreen(String [] args)
-        {
-            gui test = new gui();
+        JButton[][] button;
+
+        public void displayScreen() {
+            Gui test = new Gui();
             test.work();
         }
-        public void work(){
+
+        public void work() {
             long now = System.currentTimeMillis();
             JFrame frame = new JFrame("JPacMan"); // gives us title of application
             JPanel panel = new JPanel();
@@ -44,35 +40,38 @@ import java.io.IOException;
 
 
 
-            for(int i = 0 ; i< pac2.board.length; i++) {
-                for (int j = 0; j < pac2.board[i].length; j++) {
+
+            for (int i = 0; i < Pac2.board.length; i++) {
+                for (int j = 0; j < Pac2.board[i].length; j++) {
                     button[i][j].setBorderPainted(false);
                     button[i][j].setFocusPainted(false);
                     button[i][j].setContentAreaFilled(false);
-                    if(pac2.board[i][j] == '0'){
+                    if (Pac2.board[i][j] == '0') {
                         button[i][j] = new JButton(Wall);
-                    }
-                    else if(pac2.board[i][j] == '+' || pac2.board[i][j] == '-' ){
+                    } else if (Pac2.board[i][j] == '+' || Pac2.board[i][j] == '-') {
                         button[i][j] = new JButton(Pizza);
+                    } else if (Pac2.board[i][j] == '<') {
+                        button[i][j] = new JButton(Uni);
+                        pac2.add(button[i][j]);
+                    } else if (Pac2.board[i][j] == 'a') {
+                    button[i][j] = new JButton(A);
+                        pac2.add(button[i][j]);
+                    }else if (Pac2.board[i][j] == 'b') {
+                        button[i][j] = new JButton(B);
+                        pac2.add(button[i][j]);
+                    }else if (Pac2.board[i][j] == 'j') {
+                        button[i][j] = new JButton(J);
+                        pac2.add(button[i][j]);
+                    }else if (Pac2.board[i][j] == 't') {
+                        button[i][j] = new JButton(T);
+                        pac2.add(button[i][j]);
                     }
-                    else if(pac2.board[i][j] == '<'){
-                        button[i][j] = new JButton();
-                    pac2.add(button[i][j]);
-                }
+                   pac2.add(button[i][j]);
+                    button[i][j].setBounds(i*50,j*50,50,50);
             }
 
 
 
-            button[0].setBounds(100, 500, 80,60);
-            button[1].setBounds(100, 200, 80,60);
-            button[2].setBounds(50, 400, 80,60);
-            button[3].setBounds(1000, 500, 80,60);
-            button[4].setBounds(1000, 200, 80,60);
-            button[5].setBounds(1050, 400, 80,60);
-            button[6].setBounds(500, 500, 80,60);
-            button[7].setBounds(500, 200, 80,60);
-            button[8].setBounds(300, 300, 80,60);
-            button[9].setBounds(700, 500, 80,60);
 
 
 //            Timer timer = new Timer(2500, new ActionListener(){
@@ -112,11 +111,12 @@ import java.io.IOException;
 //            });
 //            timer.start();
 
-            score.setText("game over");
-            pac2.add(score);
-            panel.add(pac2);
-            frame.add(panel);
+                score.setText("game over");
+                pac2.add(score);
+                panel.add(pac2);
+                frame.add(panel);
+
+            }
 
         }
-
     }
