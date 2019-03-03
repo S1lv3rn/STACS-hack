@@ -10,7 +10,8 @@ public class Arcade implements ActionListener {
     private JList list;
     private JLabel coretext;
     private static String game[] = new String[2];
-    static int check = 0;
+    private static int check = 0;
+    public static SpeechConfig config = SpeechConfig.fromSubscription("54eeec34e6844d1dae7f02d1518cfbe0", "eastus");
     public Arcade() {
         // the clickable button
         JButton button = new JButton("Click Me");
@@ -51,7 +52,6 @@ public class Arcade implements ActionListener {
 
     public static void GameExecute(int code) {
         check = 1;
-
         if (code == 0) {
             new Thread(
                     new Runnable() {
@@ -67,13 +67,11 @@ public class Arcade implements ActionListener {
             ).start();
         } else if (code == 1)
             Pacmain.main();
-
     }
     public static void main(String[] args) {
         try{
             int speechcheck = 1;
             Arcade A = new Arcade();
-            SpeechConfig config = SpeechConfig.fromSubscription("54eeec34e6844d1dae7f02d1518cfbe0", "eastus");
             voce.SpeechInterface.init("./lib", true, false,
                     "./lib/gram", "digits");
             game[0] = "Pong";
@@ -87,7 +85,7 @@ public class Arcade implements ActionListener {
                     int count = 0;
                     for (String gamelist : game) {
                         System.out.println(++count + "." + gamelist);
-                        voce.SpeechInterface.synthesize(count + " " + gamelist);
+                        voce.SpeechInterface.synthesize(count + "   " + gamelist);
                     }
                     if (speechcheck == 0)
                         gameenter = keyboard.nextLine();
@@ -96,16 +94,12 @@ public class Arcade implements ActionListener {
                         SpeechRecognizer recognizer = new SpeechRecognizer(config);
                         {
                             SpeechRecognitionResult result = recognizer.recognizeOnceAsync().get();
-                            System.out.println(result.getText());
+                            char[] arr = result.getText().toCharArray();
+                            if (result.getText().length() > 0)
+                                arr[arr.length - 1] = '\0';
+                            System.out.println(arr);
                         }
-//                 //   voce.SpeechInterface.setRecognizerEnabled(true);
-//                    while (voce.SpeechInterface.getRecognizerQueueSize() > 0) {
-//                        //  gameenter = voce.SpeechInterface.popRecognizedString();
-//                        System.out.println(voce.SpeechInterface.popRecognizedString());
-//                    }
-
                     }
-                    check = 0;
                     for (int i = 0; i < game.length; i++) {
                         if (game[i].equals(gameenter)) {
                             check = 1;
@@ -114,7 +108,7 @@ public class Arcade implements ActionListener {
                     }
                 }
                 while (check == 0);
-                voce.SpeechInterface.destroy();
+                //  voce.SpeechInterface.destroy();
             } else {
                 for (int i = 0; i < game.length; i++) {
                     if (game[i].equals(gameenter)) {
