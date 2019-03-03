@@ -1,90 +1,63 @@
 public class Pacman {
 
-    public static char pacman = '<';
-
+    public static int row = 26;
+    public static int column = 13;
+    public char character;
     public static int points = 0;
+    private final int LEFTBORDER = 0;
+    private final int RIGHTBORDER = 27;
+    private char original;
 
-    private int row = 26;
-    private int column = 13;
-
-    Board board = new Board();
-
-    public static int addPoints() {
+    public int addPoints() {
         points++;
         return points;
     }
 
-    public char pacmanDirection(char dir) {
+    public char characterDirection(char dir) {
         if (dir == 'a') {
-            pacman = '>';
+            character = '>';
         } else if (dir == 'd') {
-            pacman = '<';
+            character = '<';
         } else if (dir == 'w') {
-            pacman = 'v';
+            character = 'v';
         } else if (dir == 's') {
-            pacman = '∧';
+            character = '∧';
         }
 
-        return pacman;
+        return character;
     }
 
-    private char original;
-    public void initPacman() {
+    public void initcharacter() {
+        character = '<';
         original = pac2.board[row][column];
-        pac2.board[row][column] = pacman;
+        pac2.board[row][column] = character;
     }
 
-    public void movePacman(char dir) {
+    public void moveCharacter(char dir) {
+        Movement movement = new Movement(row, column);
 
+        character = characterDirection(dir);
         if (dir == 'd') {
-            if (board.canLeftRight(pac2.board[row][column+1])) {
-                pac2.board[row][column] = original;
-                column++;
-                original = pac2.board[row][column];
-                pacman = pacmanDirection(dir);
-                pac2.board[row][column] = pacman;
-            }
-            else if((column + 1) > pac2.board.length){
-                pac2.board[row][column] = original;
+            original = movement.moveRight(character, original);
+            if (column == RIGHTBORDER) {
                 column = 0;
-                original = pac2.board[row][column];
-                pacman = pacmanDirection(dir);
-                pac2.board[row][column] = pacman;
+            } else {
+                column++;
             }
         } else if (dir == 'a') {
-            if (board.canLeftRight(pac2.board[row][column-1])) {
-                pac2.board[row][column] = original;
-                column--;
-                original = pac2.board[row][column];
-                pacman = pacmanDirection(dir);
-                pac2.board[row][column] = pacman;
+            original = movement.moveLeft(character, original);
+            if (column == LEFTBORDER) {
+                column = pac2.board[row].length;
             }
-            else if((column - 1) == -1){
-                pac2.board[row][column] = original;
-                column = pac2.board.length;
-                original = pac2.board[row][column];
-                pac2.board[row][column] = original;
-                column--;
-                original = pac2.board[row][column];
-                pacman = pacmanDirection(dir);
-                pac2.board[row][column] = pacman;
-            }
+            column--;
         } else if (dir == 'w') {
-            if (board.canUpDown(pac2.board[row - 1][column])) {
-                pac2.board[row][column] = original;
-                row--;
-                original = pac2.board[row][column];
-                pacman = pacmanDirection(dir);
-                pac2.board[row][column] = pacman;
-            }
+            original = movement.moveUp(character, original);
+            row--;
         }else if (dir == 's') {
-            if (board.canUpDown(pac2.board[row + 1][column])) {
-                pac2.board[row][column] = original;
-                row++;
-                original = pac2.board[row][column];
-                pacman = pacmanDirection(dir);
-                pac2.board[row][column] = pacman;
-            }
+            original = movement.moveDown(character, original);
+            row++;
         }
+
+        System.out.println(original);
     }
 }

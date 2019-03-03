@@ -20,18 +20,20 @@ public class Board {
     }
 
     public boolean canLeftRight(char nextBlock) {
-        if (getBlock(nextBlock) != horizontal && getBlock(nextBlock) != intersection) {
-            return false;
+        switch (nextBlock) {
+            case wall : return false;
+            case horizontal : return true;
+            case vertical : return false;
+            case intersection : return true;
+            default: return false;
         }
-
-        return true;
     }
 
     public boolean canUpDown(char nextBlock) {
-        if (getBlock(nextBlock) != vertical && getBlock(nextBlock) != wall) {
-            return false;
+        switch (nextBlock) {
+            case wall : return false;
+            case horizontal : return false;
+            default: return true;
         }
-
-        return true;
     }
 }
