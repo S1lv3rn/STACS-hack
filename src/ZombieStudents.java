@@ -39,7 +39,7 @@ public class ZombieStudents {
 
         int rand = new Random().nextInt(2);
 
-        if (board.canUpDown(pac2.board[row-1][column]) || board.canUpDown(pac2.board[row+1][column])) {
+        if (board.canUpDown(Pac2.board[row-1][column]) || board.canUpDown(Pac2.board[row+1][column])) {
             if (rand == 0) {
                 movement.moveUp(zombie, original);
             } else {

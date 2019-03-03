@@ -21,11 +21,21 @@ public class Board {
 
     public boolean canLeftRight(char nextBlock) {
         switch (nextBlock) {
-            case wall : return false;
-            case horizontal : return true;
-            case vertical : return false;
-            case intersection : return true;
-            default: return false;
+            case wall :
+                System.out.println("You can't go this way");
+                return false;
+            case horizontal :
+                System.out.println("ok");
+                return true;
+            case vertical :
+                System.out.println("You can only go up or down");
+                return false;
+            case intersection :
+                System.out.println("cmon in");
+                return true;
+            default:
+                System.out.println(":v");
+                return false;
         }
     }
 

@@ -29,8 +29,8 @@ public class Pacman {
 
     public void initcharacter() {
         character = '<';
-        original = pac2.board[row][column];
-        pac2.board[row][column] = character;
+        original = Pac2.board[row][column];
+        Pac2.board[row][column] = character;
     }
 
     public void moveCharacter(char dir) {
@@ -39,17 +39,16 @@ public class Pacman {
         character = characterDirection(dir);
         if (dir == 'd') {
             original = movement.moveRight(character, original);
+            column++;
             if (column == RIGHTBORDER) {
                 column = 0;
-            } else {
-                column++;
             }
         } else if (dir == 'a') {
             original = movement.moveLeft(character, original);
-            if (column == LEFTBORDER) {
-                column = pac2.board[row].length;
-            }
             column--;
+            if (column == LEFTBORDER) {
+                column = Pac2.board[row].length - 1;
+            }
         } else if (dir == 'w') {
             original = movement.moveUp(character, original);
             row--;

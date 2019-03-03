@@ -13,52 +13,55 @@ public class Movement {
 
     public char moveUp(char character, char original) {
 
-        if (board.canUpDown(pac2.board[row - 1][column])) {
-            pac2.board[row][column] = original;
+        if (board.canUpDown(Pac2.board[row - 1][column])) {
+            Pac2.board[row][column] = original;
             row--;
-            original = pac2.board[row][column];
-            pac2.board[row][column] = character;
-        } else {
-            pac2.board[row][column] = character;
+            original = Pac2.board[row][column];
+            Pac2.board[row][column] = character;
         }
+//        else {
+//            Pac2.board[row][column] = character;
+//        }
 
         System.out.println("up");
         return original;
     }
 
     public char moveDown(char character, char original) {
-        if (board.canUpDown(pac2.board[row + 1][column])) {
-            pac2.board[row][column] = original;
+        if (board.canUpDown(Pac2.board[row + 1][column])) {
+            Pac2.board[row][column] = original;
             row++;
-            original = pac2.board[row][column];
-            pac2.board[row][column] = character;
-        } else {
-            pac2.board[row][column] = character;
+            original = Pac2.board[row][column];
+            Pac2.board[row][column] = character;
         }
+//        else {
+//            Pac2.board[row][column] = character;
+//        }
 
         System.out.println("down");
         return original;
     }
 
     public char moveLeft(char character, char original) {
-        if (board.canLeftRight(pac2.board[row][column - 1])) {
-            pac2.board[row][column] = original;
+        if (board.canLeftRight(Pac2.board[row][column - 1])) {
+            Pac2.board[row][column] = original;
             column--;
-            original = pac2.board[row][column];
-            pac2.board[row][column] = character;
+            original = Pac2.board[row][column];
+            Pac2.board[row][column] = character;
 
         } else if (column == LEFTBORDER) {
-            pac2.board[row][LEFTBORDER] = original;
+            Pac2.board[row][LEFTBORDER] = original;
             column = RIGHTBORDER;
-            pac2.board[row][column] = original;
+            Pac2.board[row][column] = original;
             column--;
-            original = pac2.board[row][column];
-            pac2.board[row][column] = character;
+            original = Pac2.board[row][column];
+            Pac2.board[row][column] = character;
 
-        } else {
-            pac2.board[row][column] = character;
-            return original;
         }
+//        else {
+//            Pac2.board[row][column] = character;
+//            return original;
+//        }
 
         System.out.println("left");
 
@@ -66,30 +69,25 @@ public class Movement {
     }
 
     public char moveRight(char character, char original) {
-        System.out.println("COL: " + pac2.board[row].length);
 
         if (column + 1 == RIGHTBORDER) {
-            System.out.println("COL: " + column);
-            pac2.board[row][RIGHTBORDER] = original;
-            System.out.println("nah");
+            Pac2.board[row][RIGHTBORDER] = original;
             column = LEFTBORDER;
-            System.out.println("hm");
-            original = pac2.board[row][column];
-            System.out.println("uh");
-            pac2.board[row][column] = character;
-            System.out.println("wju");
+            original = Pac2.board[row][column];
+            Pac2.board[row][column] = character;
             return original;
 
-        } else if (board.canLeftRight(pac2.board[row][column + 1])) {
-            pac2.board[row][column] = original;
+        } else if (board.canLeftRight(Pac2.board[row][column + 1])) {
+            Pac2.board[row][column] = original;
             column++;
-            original = pac2.board[row][column];
-            pac2.board[row][column] = character;
+            original = Pac2.board[row][column];
+            Pac2.board[row][column] = character;
 
-        } else {
-            pac2.board[row][column] = character;
-            return original;
         }
+//        else {
+//            Pac2.board[row][column] = character;
+//            return original;
+//        }
 
         return original;
     }
