@@ -10,6 +10,7 @@ public class Pong extends JPanel{
 
     //handles game logic
     boolean pvp;
+    boolean ans = false;
     int state = 0;
     int scWidth = 1000;
     int scHeight = 500;
@@ -25,7 +26,7 @@ public class Pong extends JPanel{
     Bat p1 = new Bat(20,scHeight/2, true);
     Bat p2 = new Bat(scWidth - 40, scHeight/2, false);
 
-    ArrayList<Sprites> sprList = new ArrayList<>();
+    ArrayList<Sprites> sprList = new ArrayList<Sprites>();
 
 
 
@@ -38,7 +39,7 @@ public class Pong extends JPanel{
         ball.pVp = pvp;
 
         KeyListener listener = new KeyListener() {
-            @Override
+
             public void keyTyped(KeyEvent keyEvent) {
 
                 if (keyEvent.getKeyCode() == KeyEvent.VK_W) {
@@ -49,7 +50,6 @@ public class Pong extends JPanel{
                 }
             }
 
-            @Override
             public void keyPressed(KeyEvent keyEvent) {
                 if (state == 0) {
                     if (keyEvent.getKeyCode() == KeyEvent.VK_W) {
@@ -67,17 +67,18 @@ public class Pong extends JPanel{
                 } else if (state == 3) {
                     if (keyEvent.getKeyCode() == KeyEvent.VK_Y) {
                         playAgain = true;
+                        ans = true;
+                        System.out.println("YES");
 
                     } else if (keyEvent.getKeyCode() == KeyEvent.VK_N) {
                         playAgain = false;
+                        ans = true;
+                        System.out.println("NO");
 
                     }
-
-
                 }
             }
 
-            @Override
             public void keyReleased(KeyEvent keyEvent) {
             }
         };
@@ -100,55 +101,84 @@ public class Pong extends JPanel{
         setUp(pong);
 
         while (again) {
+            System.out.println(2);
+            pong.ans = false;
+
 
             while (game) {
+
                 if (mode == 2) {
                     pong.state = 4;
                     printAndVal(pong);
-                    Thread.sleep(20);
+                    Thread.sleep(100);
                 }
+                System.out.println("bruh");
 
                 pong.state = 1;
                 //introduce mode (1)
                 printAndVal(pong);
                 Thread.sleep(20);
+                System.out.println("bruh1");
 
                 pong.state = 0;
                 while (play) {
                     pong.moveAll();
 
                     printAndVal(pong); //upd8 game (0)
-                    Thread.sleep(5);
+                    Thread.sleep(20);
 
                     play = finRound(pong, mode);
+                    System.out.println("CHECKIN PL : " + play);
                 } //finish a mode
 
+                game = finGame(pong, mode);
                 pong.state = 2;
                 printAndVal(pong); // display winner (2)
-                Thread.sleep(20);
-                game = finGame(pong, mode);
+                Thread.sleep(100);
+
+                System.out.println("CHEKN: GG " + game);
                 play = game;
 
                 if (!game && mode == 2) {
                     pong.state = 5;
                     printAndVal(pong); // display combine winner (2)
-                    Thread.sleep(20);
+                    Thread.sleep(50);
 
-                } else {
+                } else if (mode == 2) {
+
+                    //reset the game
+                    pong.ball.reSet();
+                    pong.switchClick();
+
                     if (pong.pvp) {
-                        System.out.println("Switch to PVP!");
-                    } else {
-                        System.out.println("Switch to COOP!");
-                    }
+                        System.out.println("Switch to PVP! ");
 
+                    } else {
+                        pong.rounds++;
+                        System.out.println("Switch to COOP! R" + pong.rounds);
+                    }
                 }
             }
 
-            pong.state = 3;
-            printAndVal(pong); // check play again (3)
-            Thread.sleep(20);
+            while (!pong.ans) {
+                pong.state = 3;
+                printAndVal(pong); // check play again (3)
+                Thread.sleep(10);
+            }
             again = pong.playAgain;
+            System.out.println("BR8! " + again);
+
+            if (again) {
+                game = true;
+                play = true;
+                pong.ball.reSet();
+            }
+            System.out.println(1);
         }
+
+        System.out.println(4);
+        Window win = SwingUtilities.getWindowAncestor(pong);
+        win.dispose();
     }
 
     public static void runPong(){}
@@ -182,6 +212,7 @@ public class Pong extends JPanel{
                 return true;
             }
         } else {
+            System.out.println("CHEKIN AND " + p.ball.coopPlay);
             return p.ball.coopPlay;
         }
     }
@@ -216,10 +247,6 @@ public class Pong extends JPanel{
                     return false;
                 }
 
-            } else if (p.pvp) {
-                p.rounds++;
-                p.ball.reSet();
-                p.switchClick();
             }
         }
         return true;
@@ -233,12 +260,6 @@ public class Pong extends JPanel{
 //
 //        }
 //    }
-
-
-
-
-
-
 
 
 
@@ -322,10 +343,10 @@ public class Pong extends JPanel{
             setBackground(new Color(169, 108, 170));
             g.setColor(Color.BLACK);
             if (p1Sc > p2Sc) {
-                g.drawString("PLAYER 1 WINS", scWidth/2, scHeight/2);
+                g.drawString("C: PLAYER 1 WINS", scWidth/2, scHeight/2);
 
             } else {
-                g.drawString("PLAYER 2 WINS", scWidth/2, scHeight/2);
+                g.drawString("C: PLAYER 2 WINS", scWidth/2, scHeight/2);
             }
 
 

@@ -38,6 +38,7 @@ public class Ball extends Sprites {
                 score2 -= 1;
 
             } else {
+                System.out.println("IT LOST");
                 coopPlay = false;
             }
 
@@ -53,6 +54,7 @@ public class Ball extends Sprites {
                 score1 -= 1;
 
             } else {
+                System.out.println("IT LOST");
                 coopPlay = false;
             }
 
@@ -83,6 +85,8 @@ public class Ball extends Sprites {
         score0 = 0;
         score1 = 10;
         score2 = 10;
+        x = X;
+        y = Y;
         coopPlay = true;
     }
 

@@ -49,68 +49,80 @@ public class Arcade implements ActionListener {
         }
     }
 
-    public static void GameExecute(int code) throws InterruptedException{
+    public static void GameExecute(int code) {
         check = 1;
+
         if (code == 0) {
-            Pong.main();
-        }
-        else if (code == 1)
+            new Thread(
+                    new Runnable() {
+                        public void run() {
+                            try {
+                                Pong.main();
+                            } catch (Exception asas) {
+                                System.out.println("Error 7");
+                                asas.printStackTrace();
+                            }
+                        }
+                    }
+            ).start();
+        } else if (code == 1)
             Pacmain.main();
+
     }
     public static void main(String[] args) {
         try{
-        int speechcheck = 1;
-        Arcade A = new Arcade();
-        SpeechConfig config = SpeechConfig.fromSubscription("54eeec34e6844d1dae7f02d1518cfbe0", "eastus");
-        voce.SpeechInterface.init("./lib", true, false,
-                "./lib/gram", "digits");
-        game[0] = "Pong";
-        game[1] = "Pacman";
-        String gameenter = "";
-        if (args.length != game.length) {
-            Scanner keyboard = new Scanner(System.in);
-            do {
-                System.out.println("Select game:");
-                voce.SpeechInterface.synthesize("Select game:");
-                int count = 0;
-                for (String gamelist : game) {
-                    System.out.println(++count + "." + gamelist);
-                    voce.SpeechInterface.synthesize(count + " " + gamelist);
-                }
-                if (speechcheck == 0)
-                    gameenter = keyboard.nextLine();
-                else {
-                    Thread.sleep(200);
-                    SpeechRecognizer recognizer = new SpeechRecognizer(config);
-                    {
-                        SpeechRecognitionResult result = recognizer.recognizeOnceAsync().get();
-                        System.out.println(result.getText());
+            int speechcheck = 1;
+            Arcade A = new Arcade();
+            SpeechConfig config = SpeechConfig.fromSubscription("54eeec34e6844d1dae7f02d1518cfbe0", "eastus");
+            voce.SpeechInterface.init("./lib", true, false,
+                    "./lib/gram", "digits");
+            game[0] = "Pong";
+            game[1] = "Pacman";
+            String gameenter = "";
+            if (args.length != game.length) {
+                Scanner keyboard = new Scanner(System.in);
+                do {
+                    System.out.println("Select game:");
+                    voce.SpeechInterface.synthesize("Select game:");
+                    int count = 0;
+                    for (String gamelist : game) {
+                        System.out.println(++count + "." + gamelist);
+                        voce.SpeechInterface.synthesize(count + " " + gamelist);
                     }
+                    if (speechcheck == 0)
+                        gameenter = keyboard.nextLine();
+                    else {
+                        Thread.sleep(200);
+                        SpeechRecognizer recognizer = new SpeechRecognizer(config);
+                        {
+                            SpeechRecognitionResult result = recognizer.recognizeOnceAsync().get();
+                            System.out.println(result.getText());
+                        }
 //                 //   voce.SpeechInterface.setRecognizerEnabled(true);
 //                    while (voce.SpeechInterface.getRecognizerQueueSize() > 0) {
 //                        //  gameenter = voce.SpeechInterface.popRecognizedString();
 //                        System.out.println(voce.SpeechInterface.popRecognizedString());
 //                    }
 
+                    }
+                    check = 0;
+                    for (int i = 0; i < game.length; i++) {
+                        if (game[i].equals(gameenter)) {
+                            check = 1;
+                            GameExecute(i);
+                        }
+                    }
                 }
-                check = 0;
+                while (check == 0);
+                voce.SpeechInterface.destroy();
+            } else {
                 for (int i = 0; i < game.length; i++) {
                     if (game[i].equals(gameenter)) {
-                        check = 1;
                         GameExecute(i);
                     }
                 }
             }
-            while (check == 0);
-            voce.SpeechInterface.destroy();
-        } else {
-            for (int i = 0; i < game.length; i++) {
-                if (game[i].equals(gameenter)) {
-                    GameExecute(i);
-                }
-            }
         }
-    }
         catch(Exception ee)
         {
             System.out.println(ee);

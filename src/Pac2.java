@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -5,6 +6,7 @@ import java.io.IOException;
 public class Pac2 {
 
     public static char[][] board = new char[36][28];
+//    int size =50 ;
 
     public void createBoard() throws IOException {
         BufferedReader read = new BufferedReader(new FileReader("maze.txt"));
@@ -34,6 +36,18 @@ public class Pac2 {
         }
 
     }
+
+//    public void display2(Graphics2D g) {
+//        for (int i = 0; i < board.length; i++) {
+//            for (int j = 0; j < board[i].length; j++) {
+//                g.setColor(Color.blue);
+//                g.drawRect(i* size, j*size, size,size);
+//            }
+//            System.out.println();
+//        }
+//
+//    }
+
 
     public char[][] getBoard() {
         return board;
