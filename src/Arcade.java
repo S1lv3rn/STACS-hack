@@ -49,13 +49,25 @@ public class Arcade implements ActionListener {
         }
     }
 
-    public static void GameExecute(int code) throws InterruptedException{
+    public static void GameExecute(int code) {
         check = 1;
+
         if (code == 0) {
-            Pong.main();
-        }
-        else if (code == 1)
+            new Thread(
+                    new Runnable() {
+                        public void run() {
+                            try {
+                                Pong.main();
+                            } catch (Exception asas) {
+                                System.out.println("Error 7");
+                                asas.printStackTrace();
+                            }
+                        }
+                    }
+            ).start();
+        } else if (code == 1)
             Pacmain.main();
+
     }
     public static void main(String[] args) {
         try{
