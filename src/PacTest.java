@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 public class PacTest {
     public static void main (String[] args) {
         Pac2 pac = new Pac2();
+        Gui panel = new Gui();
         Pacman pacman = new Pacman();
         ZombieStudents zombieA = new ZombieStudents('a');
         ZombieStudents zombieB = new ZombieStudents('b');
@@ -43,8 +44,12 @@ public class PacTest {
                 System.out.println(dir);
                 pacman.moveCharacter(dir);
                 pac.display();
+//                panel.validate();
+                panel.repaint();
 
-                System.out.println("=====");
+
+
+                //System.out.println("=====");
 
 
             }
@@ -52,8 +57,6 @@ public class PacTest {
             e.printStackTrace();
         }
 
-        while(true) {
 
-        }
     }
 }

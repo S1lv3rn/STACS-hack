@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Pac2 {
 
     public static char[][] board = new char[36][28];
-    static int size = 50 ;
+    static int size = 30 ;
 
     public void createBoard() throws IOException {
         BufferedReader read = new BufferedReader(new FileReader("maze.txt"));
@@ -40,6 +40,7 @@ public class Pac2 {
     public static void display2(Graphics2D g) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
+                System.out.println(board[i][j]);
 
                 switch (board[i][j]) {
                     case '0' : g.setColor(Color.BLACK); break;
