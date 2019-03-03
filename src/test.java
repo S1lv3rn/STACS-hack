@@ -9,7 +9,7 @@ public static void main(String[] args ) throws InterruptedException{
     while (true) {
         hello.validate();
         hello.repaint();
-        Thread.sleep(20);
+        Thread.sleep(10);
     }
 
 }

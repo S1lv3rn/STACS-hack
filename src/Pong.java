@@ -231,10 +231,10 @@ public class Pong extends JPanel{
         if (m == 0) {
             //pvp
             if (p.p1Sc > p.p2Sc) {
-                voce.SpeechInterface.synthesize("PLAYER 1 WINS");
+                voce.SpeechInterface.synthesize("PLAYER 1 WINS. PLAYER 2 is extremely LOW QUALITY");
                 System.out.println("PLAYER 1 WINS");
             } else {
-                voce.SpeechInterface.synthesize("PLAYER 2 WINS");
+                voce.SpeechInterface.synthesize("PLAYER 2 IS THE BOSS. PLAYER 1 is very junk QUALITY");
                 System.out.println("PLAYER 2 WINS");
             }
             return false;
@@ -250,11 +250,11 @@ public class Pong extends JPanel{
                 if (p.pvp) {
                     //add scores and stuff
                     if (p.p1Sc > p.p2Sc) {
-                        voce.SpeechInterface.synthesize("C: PLAYER 1 WINS");
+                        voce.SpeechInterface.synthesize("PLAYER 1 WINS. PLAYER 2 is extremely LOW QUALITY");
                         System.out.println("C: PLAYER 1 WINS");
 
                     } else {
-                        voce.SpeechInterface.synthesize("C: PLAYER 2 WINS");
+                        voce.SpeechInterface.synthesize("PLAYER 2 IS THE BOSS. PLAYER 1 is very junk QUALITY");
                         System.out.println("C: PLAYER 2 WINS");
                     }
                     return false;

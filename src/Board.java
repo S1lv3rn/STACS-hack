@@ -22,12 +22,14 @@ public class Board {
     public boolean canLeftRight(char nextBlock) {
         switch (nextBlock) {
             case wall :
+                voce.SpeechInterface.synthesize("You can't go this way");
                 System.out.println("You can't go this way");
                 return false;
             case horizontal :
                 System.out.println("ok");
                 return true;
             case vertical :
+                voce.SpeechInterface.synthesize("You can only go up or down");
                 System.out.println("You can only go up or down");
                 return false;
             case intersection :

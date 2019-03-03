@@ -38,6 +38,7 @@ public class Ball extends Sprites {
                 score2 -= 1;
 
             } else {
+                voce.SpeechInterface.synthesize("YOU LOST         , you low quality cockroachhhhhhhhhhhhh!!!");
                 System.out.println("IT LOST");
                 coopPlay = false;
             }
@@ -54,6 +55,7 @@ public class Ball extends Sprites {
                 score1 -= 1;
 
             } else {
+                voce.SpeechInterface.synthesize("YOU LOST, you very low quality cockroachhhhhhhhhhhhhh!!!");
                 System.out.println("IT LOST");
                 coopPlay = false;
             }
@@ -64,9 +66,6 @@ public class Ball extends Sprites {
             Thread.sleep(100);
 
         }
-
-
-
     }
 
     void collision(Bat b) {

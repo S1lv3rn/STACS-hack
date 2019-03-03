@@ -9,7 +9,7 @@ public class Arcade implements ActionListener {
     private JFrame frame = new JFrame();
     private JList list;
     private JLabel coretext;
-    private static String game[] = new String[2];
+    private static String game[] = new String[1];
     private static int check = 0;
     public static SpeechConfig config = SpeechConfig.fromSubscription("54eeec34e6844d1dae7f02d1518cfbe0", "eastus");
     public Arcade() {
@@ -75,7 +75,7 @@ public class Arcade implements ActionListener {
             voce.SpeechInterface.init("./lib", true, false,
                     "./lib/gram", "digits");
             game[0] = "Pong";
-            game[1] = "Pacman";
+            //   game[1] = "Pacman";
             String gameenter = "";
             if (args.length != game.length) {
                 Scanner keyboard = new Scanner(System.in);
